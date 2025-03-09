@@ -24,9 +24,13 @@ public class JwtUtil {
     // Validate JWT Token
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
+            Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token);
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
+        } catch (Exception e) {
+            System.out.println("JWT Validation Error: " + e.getMessage());  // 🔍 Debugging log
             return false;
         }
     }
